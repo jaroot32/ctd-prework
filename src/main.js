@@ -10,7 +10,7 @@ document.querySelector('#app').innerHTML = `
 `
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const artworksContainer = document.getElementById("artworks");
+    const artworksContainer = document.querySelector("#artworks");
     const artworks = await getFetch("artworks");
 
     artworks.forEach(artwork => {
