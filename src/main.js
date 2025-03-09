@@ -19,6 +19,11 @@ document.querySelector('#app').innerHTML = `
       Click on the Vite logo to learn more
     </p>
   </div>
+  <div>
+    <h1>Artworks</h1>
+    <div id="artworks"></div>
+    <a href="pages/artists.html">View Artists</a>
+  </div>
 `
 
 setupCounter(document.querySelector('#counter'))
