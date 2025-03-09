@@ -1,24 +1,7 @@
 import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import { getFetch } from "./getFetch.js";
 
 document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
   <div>
     <h1>Artworks</h1>
     <div id="artworks"></div>
@@ -26,4 +9,17 @@ document.querySelector('#app').innerHTML = `
   </div>
 `
 
-setupCounter(document.querySelector('#counter'))
+document.addEventListener("DOMContentLoaded", async () => {
+    const artworksContainer = document.getElementById("artworks");
+    const artworks = await getFetch("artworks");
+
+    artworks.forEach(artwork => {
+        const artElement = document.createElement("div");
+        artElement.innerHTML = `
+            <h2>${artwork.title}</h2>
+            <p>Artist: ${artwork.artist_display || "Unknown"}</p>
+            <img src="https://www.artic.edu/iiif/2/${artwork.image_id}/full/200,/0/default.jpg" alt="${artwork.title}">
+        `;
+        artworksContainer.appendChild(artElement);
+    });
+});
